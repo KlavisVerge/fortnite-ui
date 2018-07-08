@@ -34,6 +34,7 @@ class FortniteUiApp extends PolymerElement {
       </paper-dropdown-menu>
       <paper-input always-float-label label="Epic Nick-name"></paper-input>
       <paper-button toggles raised class="custom" on-tap="_invokeApi">Get Stats</paper-button>
+      <div id='whatever'></div>
     `;
   }
   static get properties() {
@@ -46,7 +47,19 @@ class FortniteUiApp extends PolymerElement {
   }
 
   _invokeApi() {
-    console.log('hit function');
+    var url = 'https://3oemw4weak.execute-api.us-east-1.amazonaws.com/api/fortnite-api';
+    var data = {platform: 'pc', epicNickname: 'KlavisVerge'};
+
+    fetch(url, {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers:{
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    }).then(res => res.json())
+    .catch(error => console.error('Error:', error))
+    .then(response => {console.log('Success:', response); this.$.whatever.innerHTML = response;});
   }
 }
 
