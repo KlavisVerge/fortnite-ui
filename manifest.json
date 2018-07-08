@@ -1,0 +1,6 @@
+{
+  "name": "fortnite-ui",
+  "short_name": "fortnite-ui",
+  "start_url": "/",
+  "display": "standalone"
+}
