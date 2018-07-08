@@ -1,6 +1,7 @@
 {
   "name": "fortnite-ui",
   "short_name": "fortnite-ui",
+  "description": "Fortnite statistics",
   "start_url": "/",
   "display": "standalone"
 }

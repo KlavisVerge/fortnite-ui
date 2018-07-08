@@ -1,9 +1,16 @@
 {
   "name": "fortnite-ui",
+  "description": "Fortnite statistics",
   "dependencies": {
+    "@polymer/paper-button": "^3.0.0-pre.21",
+    "@polymer/paper-dropdown-menu": "^3.0.0-pre.21",
+    "@polymer/paper-input": "^3.0.0-pre.21",
+    "@polymer/paper-item": "^3.0.0-pre.21",
+    "@polymer/paper-listbox": "^3.0.0-pre.21",
     "@polymer/polymer": "^3.0.0"
   },
   "devDependencies": {
+    "web-animations-js": "^2.3.1",
     "@webcomponents/webcomponentsjs": "^2.0.0",
     "wct-browser-legacy": "^1.0.0"
   }
