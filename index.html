@@ -20,7 +20,7 @@
     <script type="module" src="/node_modules/@polymer/paper-input/paper-input.js"></script>
     <script type="module" src="/node_modules/@polymer/paper-button/paper-button.js"></script>
 
-    <style>
+    <!-- <style>
       paper-dropdown-menu, paper-listbox, paper-input, paper-button {
         width: 250px;
         margin: auto;
@@ -33,12 +33,12 @@
         background-color: var(--paper-light-blue-50);
       }
 
-    </style>
+    </style> -->
   </head>
   <body>
     <fortnite-ui-app>
     </fortnite-ui-app>
-    <paper-dropdown-menu label="Platform">
+    <!-- <paper-dropdown-menu label="Platform">
       <paper-listbox slot="dropdown-content">
         <paper-item>pc</paper-item>
         <paper-item>xbl</paper-item>
@@ -46,6 +46,6 @@
       </paper-listbox>
     </paper-dropdown-menu>
     <paper-input always-float-label label="Epic Nick-name"></paper-input>
-    <paper-button toggles raised class="custom">Get Stats</paper-button>
+    <paper-button toggles raised class="custom" on-click="_invokeApi()">Get Stats</paper-button> -->
   </body>
 </html>
