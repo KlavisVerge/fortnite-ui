@@ -25,14 +25,20 @@ class FortniteUiApp extends PolymerElement {
         }
       </style>
       <h2>Hello [[prop1]]!</h2>
-      <paper-dropdown-menu label="Platform" id="platform">
+      <paper-dropdown-menu label="Platform" id="platform" required auto-validate error-message="Platform is required">
         <paper-listbox slot="dropdown-content">
           <paper-item>pc</paper-item>
           <paper-item>xbl</paper-item>
           <paper-item>psn</paper-item>
         </paper-listbox>
       </paper-dropdown-menu>
-      <paper-input always-float-label label="Epic Nick-name" id="epicNickName"></paper-input>
+      <paper-input 
+        always-float-label
+        label="Epic Nick-name"
+        id="epicNickName"
+        required
+        auto-validate
+        error-message="Epic Nick-name is required"></paper-input>
       <paper-button toggles raised class="custom" on-tap="_invokeApi">Get Stats</paper-button>
       <div id='whatever'></div>
     `;
@@ -47,19 +53,23 @@ class FortniteUiApp extends PolymerElement {
   }
 
   _invokeApi() {
-    var url = 'https://3oemw4weak.execute-api.us-east-1.amazonaws.com/api/fortnite-api';
-    var data = {platform: this.$.platform.value, epicNickname: this.$.epicNickName.value};
+    const platValidate = this.$.platform.validate();
+    const epicNNValidate = this.$.epicNickName.validate();
+    if(platValidate && epicNNValidate){
+      var url = 'https://3oemw4weak.execute-api.us-east-1.amazonaws.com/api/fortnite-api';
+      var data = {platform: this.$.platform.value, epicNickname: this.$.epicNickName.value};
 
-    fetch(url, {
-      method: 'POST',
-      body: JSON.stringify(data),
-      headers:{
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      }
-    }).then(res => res.json())
-    .catch(error => console.error('Error:', error))
-    .then(response => {console.log('Success:', response); this.$.whatever.innerHTML = response;});
+      fetch(url, {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers:{
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
+      }).then(res => res.json())
+      .catch(error => console.error('Error:', error))
+      .then(response => {console.log('Success:', response); this.$.whatever.innerHTML = response;});
+    }
   }
 }
 
