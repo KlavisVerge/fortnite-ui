@@ -17,11 +17,29 @@ class FortniteUiApp extends PolymerElement {
           margin: auto;
           display: block;
           text-align: center;
-          padding-bottom: 5px;
+          padding-bottom: 15px;
         }
   
         paper-button.custom:hover {
           background-color: var(--paper-light-blue-50);
+        }
+
+        paper-spinner {
+          padding: 0;
+          max-width: 0;
+          max-height: 0;
+        }
+
+        paper-spinner.active {
+          max-width: initial;
+          max-height: initial;
+          height: 15px;
+          width: 15px;
+          margin: 0px 0px 0px -15px
+        }
+
+        paper-input-error {
+          padding: 5 0 5 0;
         }
       </style>
       <h2>Hello [[prop1]]!</h2>
@@ -39,7 +57,7 @@ class FortniteUiApp extends PolymerElement {
         required
         auto-validate
         error-message="Epic Nick-name is required"></paper-input>
-      <paper-button toggles raised class="custom" on-tap="_invokeApi">Get Stats</paper-button>
+      <paper-button toggles raised class="custom" on-tap="_invokeApi"><paper-spinner id="spinner" active=[[active]]></paper-spinner>Get Stats</paper-button>
       <div id='whatever'></div>
     `;
   }
@@ -48,11 +66,18 @@ class FortniteUiApp extends PolymerElement {
       prop1: {
         type: String,
         value: 'fortnite-ui-app'
+      },
+      active: {
+        type: Boolean,
+        reflectToAttribute: true,
+        value: false
       }
     };
   }
 
   _invokeApi() {
+    this.$.spinner.active = true;
+    this.$.spinner.classList.add('active');
     const platValidate = this.$.platform.validate();
     const epicNNValidate = this.$.epicNickName.validate();
     if(platValidate && epicNNValidate){
@@ -67,8 +92,20 @@ class FortniteUiApp extends PolymerElement {
           'Content-Type': 'application/json'
         }
       }).then(res => res.json())
-      .catch(error => console.error('Error:', error))
-      .then(response => {console.log('Success:', response); this.$.whatever.innerHTML = response;});
+      .catch(error => {
+        this.$.spinner.active = false;
+        this.$.spinner.classList.remove('active');
+        console.error('Error:', error)
+      })
+      .then(response => {
+        console.log('Success:', response);
+        this.$.spinner.active = false;
+        this.$.spinner.classList.remove('active');
+        this.$.whatever.innerHTML = response;
+      });
+    }else{
+      this.$.spinner.active = false;
+      this.$.spinner.classList.remove('active');
     }
   }
 }
