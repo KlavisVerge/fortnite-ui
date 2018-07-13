@@ -43,7 +43,7 @@ class FortniteUiApp extends PolymerElement {
         }
       </style>
       <h2>Hello [[prop1]]!</h2>
-      <paper-dropdown-menu label="Platform" id="platform" required auto-validate error-message="Platform is required">
+      <paper-dropdown-menu label="Platform" id="platform" required auto-validate error-message="Platform is required" on-iron-select="_itemSelected">
         <paper-listbox slot="dropdown-content">
           <paper-item>pc</paper-item>
           <paper-item>xbl</paper-item>
@@ -107,6 +107,10 @@ class FortniteUiApp extends PolymerElement {
       this.$.spinner.active = false;
       this.$.spinner.classList.remove('active');
     }
+  }
+
+  _itemSelected() {
+    this.$.platform.validate();
   }
 }
 
