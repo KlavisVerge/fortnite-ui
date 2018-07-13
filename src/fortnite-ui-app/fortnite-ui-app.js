@@ -53,7 +53,8 @@ class FortniteUiApp extends PolymerElement {
         id="epicNickName"
         required
         auto-validate
-        error-message="Epic Nick-name is required"></paper-input>
+        error-message="Epic Nick-name is required"
+        on-keydown="_checkForEnter"></paper-input>
       <paper-button toggles raised class="custom" on-tap="_invokeApi"><paper-spinner id="spinner" active=[[active]]></paper-spinner>Get Stats</paper-button>
       <div id='whatever'></div>
     `;
@@ -108,6 +109,12 @@ class FortniteUiApp extends PolymerElement {
 
   _itemSelected() {
     this.$.platform.validate();
+  }
+
+  _checkForEnter(key) {
+    if (key.keyCode === 13) {
+      this._invokeApi();
+    }
   }
 }
 
