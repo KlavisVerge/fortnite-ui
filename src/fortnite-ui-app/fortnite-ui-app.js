@@ -18,6 +18,7 @@ class FortniteUiApp extends PolymerElement {
           display: block;
           text-align: center;
           padding-bottom: 15px;
+          padding-top: 15px;
         }
   
         paper-button.custom:hover {
@@ -36,10 +37,6 @@ class FortniteUiApp extends PolymerElement {
           height: 15px;
           width: 15px;
           margin: 0px 0px 0px -15px
-        }
-
-        paper-input-error {
-          padding: 5 0 5 0;
         }
       </style>
       <h2>Hello [[prop1]]!</h2>
