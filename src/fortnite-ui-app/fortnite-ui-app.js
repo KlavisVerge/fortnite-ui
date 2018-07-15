@@ -169,6 +169,7 @@ class FortniteUiApp extends PolymerElement {
             <div class="flex-container">
               <paper-item>Result: [[item.result]]</paper-item>
             </div>
+            <hr/>
           </template>
         </div>
       </div>
