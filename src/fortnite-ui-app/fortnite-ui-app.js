@@ -1,4 +1,5 @@
 import {html, PolymerElement} from '@polymer/polymer/polymer-element.js';
+import '@polymer/polymer/lib/elements/dom-repeat.js';
 
 /**
  * @customElement
@@ -13,7 +14,7 @@ class FortniteUiApp extends PolymerElement {
         }
 
         paper-dropdown-menu, paper-listbox, paper-input, paper-button {
-          width: 250px;
+          width: 320px;
           margin: auto;
           display: block;
           text-align: center;
@@ -165,6 +166,30 @@ class FortniteUiApp extends PolymerElement {
             <span>[[epicUserHandle]]</span>
           </div>
         </div>
+        <div class="filter display-none">
+          <template is="dom-repeat" items="[[recentMatchesRepeat]]">
+            <div class="flex-container">
+              <span>Match ID: </span>
+              <span>[[item.id]]</span>
+            </div>
+            <div class="flex-container">
+              <span>Kills: </span>
+              <span>[[item.kills]]</span>
+            </div>
+            <div class="flex-container">
+              <span>Minutes Played: </span>
+              <span>[[item.minutesPlayed]]</span>
+            </div>
+            <div class="flex-container">
+              <span>Match ID: </span>
+              <span>[[item.id]]</span>
+            </div>
+            <div class="flex-container">
+              <span>Result: </span>
+              <span>[[item.result]]</span>
+            </div>
+          </template>
+        </div>
       </div>
     `;
   }
@@ -217,6 +242,9 @@ class FortniteUiApp extends PolymerElement {
       },
       lifetimeKd: {
         type: String
+      },
+      recentMatchesRepeat: {
+        type: Array
       }
     };
   }
@@ -282,6 +310,30 @@ class FortniteUiApp extends PolymerElement {
           } else if(res.lifeTimeStats[i].key === 'K/d'){
             this.lifetimeKd = res.lifeTimeStats[i].value;
           }
+        }
+        this.recentMatchesRepeat = res.recentMatches;
+        this.recentMatchesRepeat.sort(function(a, b) {
+          return a.id - b.id;
+        });
+        for(var i = 0; i < this.recentMatchesRepeat.length; i++){
+          if(this.recentMatchesRepeat[i].top1 === 1){
+            this.recentMatchesRepeat[i].result = "Victory!"
+          } else if(this.recentMatchesRepeat[i].top3 === 1){
+            this.recentMatchesRepeat[i].result = "Top 3 finish"
+          } else if(this.recentMatchesRepeat[i].top5 === 1){
+            this.recentMatchesRepeat[i].result = "Top 5 finish"
+          } else if(this.recentMatchesRepeat[i].top6 === 1){
+            this.recentMatchesRepeat[i].result = "Sixth place finish"
+          } else if(this.recentMatchesRepeat[i].top10 === 1){
+            this.recentMatchesRepeat[i].result = "Top 10 finish"
+          } else if(this.recentMatchesRepeat[i].top12 === 1){
+            this.recentMatchesRepeat[i].result = "Top 12 finish"
+          } else if(this.recentMatchesRepeat[i].top25 === 1){
+            this.recentMatchesRepeat[i].result = "Top 25 finish"
+          } else {
+            this.recentMatchesRepeat[i].result = "Outside of the top 25"
+          }
+          this.recentMatchesRepeat.dateCollected = new Date(this.recentMatchesRepeat[i].dateCollected);
         }
       });
     }else{
