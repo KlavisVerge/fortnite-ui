@@ -83,65 +83,17 @@ class FortniteUiApp extends PolymerElement {
         <div class="flex-container">
           <div class="filter display-none">
             <paper-item>Epic User Handle: [[epicUserHandle]]</paper-item>
-          </div>
-        </div>
-        <div class="flex-container">
-          <div class="filter display-none">
             <paper-item>Lifetime Wins: [[lifetimeWins]]</paper-item>
-          </div>
-        </div>
-        <div class="flex-container">
-          <div class="filter display-none">
             <paper-item>Lifetime Kills: [[lifetimeKills]]</paper-item>
-          </div>
-        </div>
-        <div class="flex-container">
-          <div class="filter display-none">
             <paper-item>Lifetime Kill/Death Ratio: [[lifetimeKd]]</paper-item>
-          </div>
-        </div>
-        <div class="flex-container">
-          <div class="filter display-none">
             <paper-item>Lifetime Score: [[lifetimeScore]]</paper-item>
-          </div>
-        </div>
-        <div class="flex-container">
-          <div class="filter display-none">
             <paper-item>Lifetime Matches Played: [[lifetimeMatchesPlayed]]</paper-item>
-          </div>
-        </div>
-        <div class="flex-container">
-          <div class="filter display-none">
             <paper-item>Lifetime Win Percentage: [[lifetimeWinPercent]]</paper-item>
-          </div>
-        </div>
-        <div class="flex-container">
-          <div class="filter display-none">
             <paper-item>Lifetime Top 3s: [[lifetimeTop3s]]</paper-item>
-          </div>
-        </div>
-        <div class="flex-container">
-          <div class="filter display-none">
             <paper-item>Lifetime Top 5s: [[lifetimeTop5s]]</paper-item>
-          </div>
-        </div>
-        <div class="flex-container">
-          <div class="filter display-none">
             <paper-item>Lifetime Top 6s: [[lifetimeTop6s]]</paper-item>
-          </div>
-        </div>
-        <div class="flex-container">
-          <div class="filter display-none">
             <paper-item>Lifetime Top 10s: [[lifetimeTop10s]]</paper-item>
-          </div>
-        </div>
-        <div class="flex-container">
-          <div class="filter display-none">
             <paper-item>Lifetime Top 12s: [[lifetimeTop12s]]</paper-item>
-          </div>
-        </div>
-        <div class="flex-container">
-          <div class="filter display-none">
             <paper-item>Lifetime Top 25s: [[lifetimeTop25s]]</paper-item>
           </div>
         </div>
@@ -150,27 +102,15 @@ class FortniteUiApp extends PolymerElement {
         <div class="flex-container">
           <div class="filter display-none">
             <paper-item>Epic User Handle: [[epicUserHandle]]</paper-item>
-          </div>
-        </div>
-        <div class="filter display-none">
-          <template is="dom-repeat" items="[[recentMatchesRepeat]]">
-            <div class="flex-container">
+            <template is="dom-repeat" items="[[recentMatchesRepeat]]">
               <paper-item>Match ID: [[item.id]]</paper-item>
-            </div>
-            <div class="flex-container">
               <paper-item>Kills: [[item.kills]]</paper-item>
-            </div>
-            <div class="flex-container">
               <paper-item>Minutes Played: [[item.minutesPlayed]]</paper-item>
-            </div>
-            <div class="flex-container">
               <paper-item>Match ID: [[item.id]]</paper-item>
-            </div>
-            <div class="flex-container">
               <paper-item>Result: [[item.result]]</paper-item>
-            </div>
-            <hr/>
-          </template>
+              <hr/>
+            </template>
+          </div>
         </div>
       </div>
       <div id="playerNotFound">
