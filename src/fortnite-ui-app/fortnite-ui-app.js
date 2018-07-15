@@ -191,6 +191,13 @@ class FortniteUiApp extends PolymerElement {
           </template>
         </div>
       </div>
+      <div id="playerNotFound">
+        <div class="flex-container">
+          <div class="filter display-none">
+            <span>Player Not found!</span>
+          </div>
+        </div>
+      </div>
     `;
   }
   static get properties() {
@@ -276,64 +283,73 @@ class FortniteUiApp extends PolymerElement {
       })
       .then(response => {
         console.log('Success:', response);
-        this._showTabs();
-        this._showSearch();
-        this.$.paperTabs._tabChanged(this.$.tabZero, null);
-        this.$.tabZero.setAttribute("focused", "");
+        let res = JSON.parse(response);
         this.$.spinner.active = false;
         this.$.spinner.classList.remove('active');
-        let res = JSON.parse(response);
-        this.epicUserHandle = res.epicUserHandle;
-        for(var i = 0; i < res.lifeTimeStats.length; i++){
-          if(res.lifeTimeStats[i].key === 'Wins'){
-            this.lifetimeWins = res.lifeTimeStats[i].value;
-          } else if(res.lifeTimeStats[i].key === 'Top 5s'){
-            this.lifetimeTop5s = res.lifeTimeStats[i].value;
-          } else if(res.lifeTimeStats[i].key === 'Top 3s'){
-            this.lifetimeTop3s = res.lifeTimeStats[i].value;
-          } else if(res.lifeTimeStats[i].key === 'Top 6s'){
-            this.lifetimeTop6s = res.lifeTimeStats[i].value;
-          } else if(res.lifeTimeStats[i].key === 'Top 10'){
-            this.lifetimeTop10s = res.lifeTimeStats[i].value;
-          } else if(res.lifeTimeStats[i].key === 'Top 12s'){
-            this.lifetimeTop12s = res.lifeTimeStats[i].value;
-          } else if(res.lifeTimeStats[i].key === 'Top 25s'){
-            this.lifetimeTop25s = res.lifeTimeStats[i].value;
-          } else if(res.lifeTimeStats[i].key === 'Score'){
-            this.lifetimeScore = res.lifeTimeStats[i].value;
-          } else if(res.lifeTimeStats[i].key === 'Matches Played'){
-            this.lifetimeMatchesPlayed = res.lifeTimeStats[i].value;
-          } else if(res.lifeTimeStats[i].key === 'Win%'){
-            this.lifetimeWinPercent = res.lifeTimeStats[i].value;
-          } else if(res.lifeTimeStats[i].key === 'Kills'){
-            this.lifetimeKills = res.lifeTimeStats[i].value;
-          } else if(res.lifeTimeStats[i].key === 'K/d'){
-            this.lifetimeKd = res.lifeTimeStats[i].value;
+        if(res.error
+          && res.error === 'Player Not Found'){
+            this._showPlayerNotFound();
+            this._hideTabs();
+            this._hideSearch();
+            this._hideRecentMatches();
+        } else {
+          this._hidePlayerNotFound();
+          this._showTabs();
+          this._showSearch();
+          this.$.paperTabs._tabChanged(this.$.tabZero, null);
+          this.$.tabZero.setAttribute("focused", "");
+          this.epicUserHandle = res.epicUserHandle;
+          for(var i = 0; i < res.lifeTimeStats.length; i++){
+            if(res.lifeTimeStats[i].key === 'Wins'){
+              this.lifetimeWins = res.lifeTimeStats[i].value;
+            } else if(res.lifeTimeStats[i].key === 'Top 5s'){
+              this.lifetimeTop5s = res.lifeTimeStats[i].value;
+            } else if(res.lifeTimeStats[i].key === 'Top 3s'){
+              this.lifetimeTop3s = res.lifeTimeStats[i].value;
+            } else if(res.lifeTimeStats[i].key === 'Top 6s'){
+              this.lifetimeTop6s = res.lifeTimeStats[i].value;
+            } else if(res.lifeTimeStats[i].key === 'Top 10'){
+              this.lifetimeTop10s = res.lifeTimeStats[i].value;
+            } else if(res.lifeTimeStats[i].key === 'Top 12s'){
+              this.lifetimeTop12s = res.lifeTimeStats[i].value;
+            } else if(res.lifeTimeStats[i].key === 'Top 25s'){
+              this.lifetimeTop25s = res.lifeTimeStats[i].value;
+            } else if(res.lifeTimeStats[i].key === 'Score'){
+              this.lifetimeScore = res.lifeTimeStats[i].value;
+            } else if(res.lifeTimeStats[i].key === 'Matches Played'){
+              this.lifetimeMatchesPlayed = res.lifeTimeStats[i].value;
+            } else if(res.lifeTimeStats[i].key === 'Win%'){
+              this.lifetimeWinPercent = res.lifeTimeStats[i].value;
+            } else if(res.lifeTimeStats[i].key === 'Kills'){
+              this.lifetimeKills = res.lifeTimeStats[i].value;
+            } else if(res.lifeTimeStats[i].key === 'K/d'){
+              this.lifetimeKd = res.lifeTimeStats[i].value;
+            }
           }
-        }
-        this.recentMatchesRepeat = res.recentMatches;
-        this.recentMatchesRepeat.sort(function(a, b) {
-          return a.id - b.id;
-        });
-        for(var i = 0; i < this.recentMatchesRepeat.length; i++){
-          if(this.recentMatchesRepeat[i].top1 === 1){
-            this.recentMatchesRepeat[i].result = "Victory!"
-          } else if(this.recentMatchesRepeat[i].top3 === 1){
-            this.recentMatchesRepeat[i].result = "Top 3 finish"
-          } else if(this.recentMatchesRepeat[i].top5 === 1){
-            this.recentMatchesRepeat[i].result = "Top 5 finish"
-          } else if(this.recentMatchesRepeat[i].top6 === 1){
-            this.recentMatchesRepeat[i].result = "Sixth place finish"
-          } else if(this.recentMatchesRepeat[i].top10 === 1){
-            this.recentMatchesRepeat[i].result = "Top 10 finish"
-          } else if(this.recentMatchesRepeat[i].top12 === 1){
-            this.recentMatchesRepeat[i].result = "Top 12 finish"
-          } else if(this.recentMatchesRepeat[i].top25 === 1){
-            this.recentMatchesRepeat[i].result = "Top 25 finish"
-          } else {
-            this.recentMatchesRepeat[i].result = "Outside of the top 25"
+          this.recentMatchesRepeat = res.recentMatches;
+          this.recentMatchesRepeat.sort(function(a, b) {
+            return a.id - b.id;
+          });
+          for(var i = 0; i < this.recentMatchesRepeat.length; i++){
+            if(this.recentMatchesRepeat[i].top1 === 1){
+              this.recentMatchesRepeat[i].result = "Victory!"
+            } else if(this.recentMatchesRepeat[i].top3 === 1){
+              this.recentMatchesRepeat[i].result = "Top 3 finish"
+            } else if(this.recentMatchesRepeat[i].top5 === 1){
+              this.recentMatchesRepeat[i].result = "Top 5 finish"
+            } else if(this.recentMatchesRepeat[i].top6 === 1){
+              this.recentMatchesRepeat[i].result = "Sixth place finish"
+            } else if(this.recentMatchesRepeat[i].top10 === 1){
+              this.recentMatchesRepeat[i].result = "Top 10 finish"
+            } else if(this.recentMatchesRepeat[i].top12 === 1){
+              this.recentMatchesRepeat[i].result = "Top 12 finish"
+            } else if(this.recentMatchesRepeat[i].top25 === 1){
+              this.recentMatchesRepeat[i].result = "Top 25 finish"
+            } else {
+              this.recentMatchesRepeat[i].result = "Outside of the top 25"
+            }
+            this.recentMatchesRepeat.dateCollected = new Date(this.recentMatchesRepeat[i].dateCollected);
           }
-          this.recentMatchesRepeat.dateCollected = new Date(this.recentMatchesRepeat[i].dateCollected);
         }
       });
     }else{
@@ -389,6 +405,24 @@ class FortniteUiApp extends PolymerElement {
 
   _hideRecentMatches() {
     let divsShown = this.$.recentMatches.querySelectorAll("div");
+    divsShown.forEach(function(divItem) {
+      if(divItem.classList.contains('filter')){
+        divItem.classList.add('display-none');
+      }
+    });
+  }
+
+  _showPlayerNotFound() {
+    let divsShown = this.$.playerNotFound.querySelectorAll("div");
+    divsShown.forEach(function(divItem) {
+      if(divItem.classList.contains('filter')){
+        divItem.classList.remove('display-none');
+      }
+    });
+  }
+
+  _hidePlayerNotFound() {
+    let divsShown = this.$.playerNotFound.querySelectorAll("div");
     divsShown.forEach(function(divItem) {
       if(divItem.classList.contains('filter')){
         divItem.classList.add('display-none');
