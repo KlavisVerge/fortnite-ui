@@ -265,9 +265,9 @@ class FortniteUiApp extends PolymerElement {
 
   _invokeApi() {
     this.$.spinner.active = true;
-    this._hideTabs();
-    this._hideSearch();
-    this._hideRecentMatches();
+    this._hideElement(this.$.tabsDiv);
+    this._hideElement(this.$.searchResults);
+    this._hideElement(this.$.recentMatches);
     this.$.spinner.classList.add('active');
     const platValidate = this.$.platform.validate();
     const epicNNValidate = this.$.epicNickName.validate();
@@ -287,28 +287,28 @@ class FortniteUiApp extends PolymerElement {
         this.$.spinner.active = false;
         this.$.spinner.classList.remove('active');
         console.error('Error:', error);
-        this._hidePlayerNotFound();
-        this._hideTabs();
-        this._hideSearch();
-        this._hideRecentMatches();
-        this._showGeneralError();
+        this._hideElement(this.$.playerNotFound);
+        this._hideElement(this.$.tabsDiv);
+        this._hideElement(this.$.searchResults);
+        this._hideElement(this.$.recentMatches);
+        this._showElement(this.$.generalError);
       })
       .then(response => {
         console.log('Success:', response);
         let res = JSON.parse(response);
-        this._hideGeneralError();
+        this._hideElement(this.$.generalError);
         this.$.spinner.active = false;
         this.$.spinner.classList.remove('active');
         if(res.error
           && res.error === 'Player Not Found'){
-            this._showPlayerNotFound();
-            this._hideTabs();
-            this._hideSearch();
-            this._hideRecentMatches();
+            this._showElement(this.$.playerNotFound);
+            this._hideElement(this.$.tabsDiv);
+            this._hideElement(this.$.searchResults);
+            this._hideElement(this.$.recentMatches);
         } else {
-          this._hidePlayerNotFound();
-          this._showTabs();
-          this._showSearch();
+          this._hideElement(this.$.playerNotFound);
+          this._showElement(this.$.tabsDiv);
+          this._showElement(this.$.searchResults);
           this.$.paperTabs._tabChanged(this.$.tabZero, null);
           this.$.tabZero.setAttribute("focused", "");
           this.epicUserHandle = res.epicUserHandle;
@@ -371,44 +371,8 @@ class FortniteUiApp extends PolymerElement {
     }
   }
 
-  _showSearch() {
-    let divs = this.$.searchResults.querySelectorAll("div");
-    divs.forEach(function(divItem) {
-      if(divItem.classList.contains('filter')){
-        divItem.classList.remove('display-none');
-      }
-    });
-  }
-
-  _hideSearch() {
-    let divsShown = this.$.searchResults.querySelectorAll("div");
-    divsShown.forEach(function(divItem) {
-      if(divItem.classList.contains('filter')){
-        divItem.classList.add('display-none');
-      }
-    });
-  }
-
-  _showTabs() {
-    let divs = this.$.tabsDiv.querySelectorAll("div");
-    divs.forEach(function(divItem) {
-      if(divItem.classList.contains('filter')){
-        divItem.classList.remove('display-none');
-      }
-    });
-  }
-
-  _hideTabs() {
-    let divsShown = this.$.tabsDiv.querySelectorAll("div");
-    divsShown.forEach(function(divItem) {
-      if(divItem.classList.contains('filter')){
-        divItem.classList.add('display-none');
-      }
-    });
-  }
-
-  _showRecentMatches() {
-    let divsShown = this.$.recentMatches.querySelectorAll("div");
+  _showElement(element) {
+    let divsShown = element.querySelectorAll("div");
     divsShown.forEach(function(divItem) {
       if(divItem.classList.contains('filter')){
         divItem.classList.remove('display-none');
@@ -416,44 +380,8 @@ class FortniteUiApp extends PolymerElement {
     });
   }
 
-  _hideRecentMatches() {
-    let divsShown = this.$.recentMatches.querySelectorAll("div");
-    divsShown.forEach(function(divItem) {
-      if(divItem.classList.contains('filter')){
-        divItem.classList.add('display-none');
-      }
-    });
-  }
-
-  _showPlayerNotFound() {
-    let divsShown = this.$.playerNotFound.querySelectorAll("div");
-    divsShown.forEach(function(divItem) {
-      if(divItem.classList.contains('filter')){
-        divItem.classList.remove('display-none');
-      }
-    });
-  }
-
-  _hidePlayerNotFound() {
-    let divsShown = this.$.playerNotFound.querySelectorAll("div");
-    divsShown.forEach(function(divItem) {
-      if(divItem.classList.contains('filter')){
-        divItem.classList.add('display-none');
-      }
-    });
-  }
-
-  _showGeneralError() {
-    let divsShown = this.$.generalError.querySelectorAll("div");
-    divsShown.forEach(function(divItem) {
-      if(divItem.classList.contains('filter')){
-        divItem.classList.remove('display-none');
-      }
-    });
-  }
-
-  _hideGeneralError() {
-    let divsShown = this.$.generalError.querySelectorAll("div");
+  _hideElement(element) {
+    let divsShown = element.querySelectorAll("div");
     divsShown.forEach(function(divItem) {
       if(divItem.classList.contains('filter')){
         divItem.classList.add('display-none');
@@ -472,13 +400,13 @@ class FortniteUiApp extends PolymerElement {
   }
 
   _displayLifetimeStats() {
-    this._hideRecentMatches();
-    this._showSearch();
+    this._hideElement(this.$.recentMatches);
+    this._showElement(this.$.searchResults);;
   }
 
   _displayRecentMatches() {
-    this._hideSearch();
-    this._showRecentMatches();
+    this._hideElement(this.$.searchResults);
+    this._showElement(this.$.recentMatches);
   }
 }
 
