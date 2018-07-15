@@ -55,7 +55,6 @@ class FortniteUiApp extends PolymerElement {
           display: none;
         }
       </style>
-      <h2>Hello [[prop1]]!</h2>
       <paper-dropdown-menu label="Platform" id="platform" required auto-validate error-message="Platform is required" on-iron-select="_itemSelected">
         <paper-listbox slot="dropdown-content">
           <paper-item>pc</paper-item>
