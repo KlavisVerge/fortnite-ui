@@ -20,6 +20,10 @@ class FortniteUiApp extends PolymerElement {
           padding-bottom: 15px;
           padding-top: 15px;
         }
+
+        paper-tabs {
+          width: 400px;
+        }
   
         paper-button.custom:hover {
           background-color: var(--paper-light-blue-50);
@@ -66,6 +70,14 @@ class FortniteUiApp extends PolymerElement {
         error-message="Epic Nick-name is required"
         on-keydown="_checkForEnter"></paper-input>
       <paper-button toggles raised class="custom" on-tap="_invokeApi"><paper-spinner id="spinner" active=[[active]]></paper-spinner>Get Stats</paper-button>
+      <div id="tabsDiv" class="flex-container">
+        <div class="filter display-none">
+          <paper-tabs id="paperTabs" scrollable>
+            <paper-tab id="tabZero" on-tap="_displayLifetimeStats">Lifetime Statistics</paper-tab>
+            <paper-tab on-tap="_displayRecentMatches">Recent Matches</paper-tab>
+          </paper-tabs>
+        </div>
+      </div>
       <div id="searchResults">
         <div class="flex-container">
           <div class="filter display-none">
@@ -146,6 +158,14 @@ class FortniteUiApp extends PolymerElement {
           </div>
         </div>
       </div>
+      <div id="recentMatches">
+        <div class="flex-container">
+          <div class="filter display-none">
+            <span>Epic User Handle: </span>
+            <span>[[epicUserHandle]]</span>
+          </div>
+        </div>
+      </div>
     `;
   }
   static get properties() {
@@ -203,12 +223,9 @@ class FortniteUiApp extends PolymerElement {
 
   _invokeApi() {
     this.$.spinner.active = true;
-    let divsShown = this.$.searchResults.querySelectorAll("div");
-    divsShown.forEach(function(divItem) {
-      if(divItem.classList.contains('filter')){
-        divItem.classList.add('display-none');
-      }
-    });
+    this._hideTabs();
+    this._hideSearch();
+    this._hideRecentMatches();
     this.$.spinner.classList.add('active');
     const platValidate = this.$.platform.validate();
     const epicNNValidate = this.$.epicNickName.validate();
@@ -231,17 +248,14 @@ class FortniteUiApp extends PolymerElement {
       })
       .then(response => {
         console.log('Success:', response);
-        let divs = this.$.searchResults.querySelectorAll("div");
-        divs.forEach(function(divItem) {
-          if(divItem.classList.contains('filter')){
-            divItem.classList.remove('display-none');
-          }
-        });
+        this._showTabs();
+        this._showSearch();
+        this.$.paperTabs._tabChanged(this.$.tabZero, null);
+        this.$.tabZero.setAttribute("focused", "");
         this.$.spinner.active = false;
         this.$.spinner.classList.remove('active');
         let res = JSON.parse(response);
         this.epicUserHandle = res.epicUserHandle;
-        // res.lifeTimeStats.forEach(function(element) {
         for(var i = 0; i < res.lifeTimeStats.length; i++){
           if(res.lifeTimeStats[i].key === 'Wins'){
             this.lifetimeWins = res.lifeTimeStats[i].value;
@@ -276,6 +290,60 @@ class FortniteUiApp extends PolymerElement {
     }
   }
 
+  _showSearch() {
+    let divs = this.$.searchResults.querySelectorAll("div");
+    divs.forEach(function(divItem) {
+      if(divItem.classList.contains('filter')){
+        divItem.classList.remove('display-none');
+      }
+    });
+  }
+
+  _hideSearch() {
+    let divsShown = this.$.searchResults.querySelectorAll("div");
+    divsShown.forEach(function(divItem) {
+      if(divItem.classList.contains('filter')){
+        divItem.classList.add('display-none');
+      }
+    });
+  }
+
+  _showTabs() {
+    let divs = this.$.tabsDiv.querySelectorAll("div");
+    divs.forEach(function(divItem) {
+      if(divItem.classList.contains('filter')){
+        divItem.classList.remove('display-none');
+      }
+    });
+  }
+
+  _hideTabs() {
+    let divsShown = this.$.tabsDiv.querySelectorAll("div");
+    divsShown.forEach(function(divItem) {
+      if(divItem.classList.contains('filter')){
+        divItem.classList.add('display-none');
+      }
+    });
+  }
+
+  _showRecentMatches() {
+    let divsShown = this.$.recentMatches.querySelectorAll("div");
+    divsShown.forEach(function(divItem) {
+      if(divItem.classList.contains('filter')){
+        divItem.classList.remove('display-none');
+      }
+    });
+  }
+
+  _hideRecentMatches() {
+    let divsShown = this.$.recentMatches.querySelectorAll("div");
+    divsShown.forEach(function(divItem) {
+      if(divItem.classList.contains('filter')){
+        divItem.classList.add('display-none');
+      }
+    });
+  }
+
   _itemSelected() {
     this.$.platform.validate();
   }
@@ -284,6 +352,16 @@ class FortniteUiApp extends PolymerElement {
     if (key.keyCode === 13) {
       this._invokeApi();
     }
+  }
+
+  _displayLifetimeStats() {
+    this._hideRecentMatches();
+    this._showSearch();
+  }
+
+  _displayRecentMatches() {
+    this._hideSearch();
+    this._showRecentMatches();
   }
 }
 
