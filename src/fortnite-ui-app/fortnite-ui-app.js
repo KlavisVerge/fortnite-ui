@@ -82,111 +82,92 @@ class FortniteUiApp extends PolymerElement {
       <div id="searchResults">
         <div class="flex-container">
           <div class="filter display-none">
-            <span>Epic User Handle: </span>
-            <span>[[epicUserHandle]]</span>
+            <paper-item>Epic User Handle: [[epicUserHandle]]</paper-item>
           </div>
         </div>
         <div class="flex-container">
           <div class="filter display-none">
-            <span>Lifetime Wins: </span>
-            <span>[[lifetimeWins]]</span>
+            <paper-item>Lifetime Wins: [[lifetimeWins]]</paper-item>
           </div>
         </div>
         <div class="flex-container">
           <div class="filter display-none">
-            <span>Lifetime Kills: </span>
-            <span>[[lifetimeKills]]</span>
+            <paper-item>Lifetime Kills: [[lifetimeKills]]</paper-item>
           </div>
         </div>
         <div class="flex-container">
           <div class="filter display-none">
-            <span>Lifetime Kill/Death Ratio: </span>
-            <span>[[lifetimeKd]]</span>
+            <paper-item>Lifetime Kill/Death Ratio: [[lifetimeKd]]</paper-item>
           </div>
         </div>
         <div class="flex-container">
           <div class="filter display-none">
-            <span>Lifetime Score: </span>
-            <span>[[lifetimeScore]]</span>
+            <paper-item>Lifetime Score: [[lifetimeScore]]</paper-item>
           </div>
         </div>
         <div class="flex-container">
           <div class="filter display-none">
-            <span>Lifetime Matches Played: </span>
-            <span>[[lifetimeMatchesPlayed]]</span>
+            <paper-item>Lifetime Matches Played: [[lifetimeMatchesPlayed]]</paper-item>
           </div>
         </div>
         <div class="flex-container">
           <div class="filter display-none">
-            <span>Lifetime Win Percentage: </span>
-            <span>[[lifetimeWinPercent]]</span>
+            <paper-item>Lifetime Win Percentage: [[lifetimeWinPercent]]</paper-item>
           </div>
         </div>
         <div class="flex-container">
           <div class="filter display-none">
-            <span>Lifetime Top 3s: </span>
-            <span>[[lifetimeTop3s]]</span>
+            <paper-item>Lifetime Top 3s: [[lifetimeTop3s]]</paper-item>
           </div>
         </div>
         <div class="flex-container">
           <div class="filter display-none">
-            <span>Lifetime Top 5s: </span>
-            <span>[[lifetimeTop5s]]</span>
+            <paper-item>Lifetime Top 5s: [[lifetimeTop5s]]</paper-item>
           </div>
         </div>
         <div class="flex-container">
           <div class="filter display-none">
-            <span>Lifetime Top 6s: </span>
-            <span>[[lifetimeTop6s]]</span>
+            <paper-item>Lifetime Top 6s: [[lifetimeTop6s]]</paper-item>
           </div>
         </div>
         <div class="flex-container">
           <div class="filter display-none">
-            <span>Lifetime Top 10s: </span>
-            <span>[[lifetimeTop10s]]</span>
+            <paper-item>Lifetime Top 10s: [[lifetimeTop10s]]</paper-item>
           </div>
         </div>
         <div class="flex-container">
           <div class="filter display-none">
-            <span>Lifetime Top 12s: </span>
-            <span>[[lifetimeTop12s]]</span>
+            <paper-item>Lifetime Top 12s: [[lifetimeTop12s]]</paper-item>
           </div>
         </div>
         <div class="flex-container">
           <div class="filter display-none">
-            <span>Lifetime Top 25s: </span>
-            <span>[[lifetimeTop25s]]</span>
+            <paper-item>Lifetime Top 25s: [[lifetimeTop25s]]</paper-item>
           </div>
         </div>
       </div>
       <div id="recentMatches">
         <div class="flex-container">
           <div class="filter display-none">
-            <span>Epic User Handle: </span>
-            <span>[[epicUserHandle]]</span>
+            <paper-item>Epic User Handle: [[epicUserHandle]]</paper-item>
           </div>
         </div>
         <div class="filter display-none">
           <template is="dom-repeat" items="[[recentMatchesRepeat]]">
             <div class="flex-container">
-              <span>Match ID: </span>
-              <span>[[item.id]]</span>
+              <paper-item>Match ID: [[item.id]]</paper-item>
             </div>
             <div class="flex-container">
-              <span>Kills: </span>
-              <span>[[item.kills]]</span>
+              <paper-item>Kills: [[item.kills]]</paper-item>
             </div>
             <div class="flex-container">
-              <span>Minutes Played: </span>
-              <span>[[item.minutesPlayed]]</span>
+              <paper-item>Minutes Played: [[item.minutesPlayed]]</paper-item>
             </div>
             <div class="flex-container">
-              <span>Match ID: </span>
-              <span>[[item.id]]</span>
+              <paper-item>Match ID: [[item.id]]</paper-item>
             </div>
             <div class="flex-container">
-              <span>Result: </span>
-              <span>[[item.result]]</span>
+              <paper-item>Result: [[item.result]]</paper-item>
             </div>
           </template>
         </div>
@@ -194,14 +175,14 @@ class FortniteUiApp extends PolymerElement {
       <div id="playerNotFound">
         <div class="flex-container">
           <div class="filter display-none">
-            <span>Player Not found!</span>
+            <paper-item>Player Not found!</paper-item>
           </div>
         </div>
       </div>
       <div id="generalError">
         <div class="flex-container">
           <div class="filter display-none">
-            <span>Error processing request.</span>
+            <paper-item>Error processing request.</paper-item>
           </div>
         </div>
       </div>
