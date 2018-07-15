@@ -53,6 +53,10 @@ class FortniteUiApp extends PolymerElement {
         .display-none {
           display: none;
         }
+
+        paper-tabs {
+          --paper-tabs-selection-bar-color: var(--paper-blue-900);
+        }
       </style>
       <h2>Hello [[prop1]]!</h2>
       <paper-dropdown-menu label="Platform" id="platform" required auto-validate error-message="Platform is required" on-iron-select="_itemSelected">
