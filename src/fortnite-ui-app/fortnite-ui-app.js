@@ -25,6 +25,7 @@ class FortniteUiApp extends PolymerElement {
         paper-tabs {
           width: 400px;
           --paper-tabs-selection-bar-color: var(--paper-blue-900);
+          --paper-tab-ink: var(--paper-blue-900);
         }
   
         paper-button.custom:hover {
