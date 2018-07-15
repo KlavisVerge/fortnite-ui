@@ -198,6 +198,13 @@ class FortniteUiApp extends PolymerElement {
           </div>
         </div>
       </div>
+      <div id="generalError">
+        <div class="flex-container">
+          <div class="filter display-none">
+            <span>Error processing request.</span>
+          </div>
+        </div>
+      </div>
     `;
   }
   static get properties() {
@@ -279,11 +286,17 @@ class FortniteUiApp extends PolymerElement {
       .catch(error => {
         this.$.spinner.active = false;
         this.$.spinner.classList.remove('active');
-        console.error('Error:', error)
+        console.error('Error:', error);
+        this._hidePlayerNotFound();
+        this._hideTabs();
+        this._hideSearch();
+        this._hideRecentMatches();
+        this._showGeneralError();
       })
       .then(response => {
         console.log('Success:', response);
         let res = JSON.parse(response);
+        this._hideGeneralError();
         this.$.spinner.active = false;
         this.$.spinner.classList.remove('active');
         if(res.error
@@ -423,6 +436,24 @@ class FortniteUiApp extends PolymerElement {
 
   _hidePlayerNotFound() {
     let divsShown = this.$.playerNotFound.querySelectorAll("div");
+    divsShown.forEach(function(divItem) {
+      if(divItem.classList.contains('filter')){
+        divItem.classList.add('display-none');
+      }
+    });
+  }
+
+  _showGeneralError() {
+    let divsShown = this.$.generalError.querySelectorAll("div");
+    divsShown.forEach(function(divItem) {
+      if(divItem.classList.contains('filter')){
+        divItem.classList.remove('display-none');
+      }
+    });
+  }
+
+  _hideGeneralError() {
+    let divsShown = this.$.generalError.querySelectorAll("div");
     divsShown.forEach(function(divItem) {
       if(divItem.classList.contains('filter')){
         divItem.classList.add('display-none');
