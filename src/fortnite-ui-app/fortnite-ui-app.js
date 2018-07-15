@@ -24,6 +24,7 @@ class FortniteUiApp extends PolymerElement {
 
         paper-tabs {
           width: 400px;
+          --paper-tabs-selection-bar-color: var(--paper-blue-900);
         }
   
         paper-button.custom:hover {
@@ -52,10 +53,6 @@ class FortniteUiApp extends PolymerElement {
 
         .display-none {
           display: none;
-        }
-
-        paper-tabs {
-          --paper-tabs-selection-bar-color: var(--paper-blue-900);
         }
       </style>
       <h2>Hello [[prop1]]!</h2>
