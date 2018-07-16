@@ -3,10 +3,10 @@
   "description": "Fortnite statistics",
   "dependencies": {
     "@polymer/paper-button": "^3.0.0-pre.21",
-    "@polymer/paper-dropdown-menu": "^3.0.0-pre.21",
     "@polymer/paper-input": "^3.0.0-pre.21",
     "@polymer/paper-item": "^3.0.0-pre.21",
     "@polymer/paper-listbox": "^3.0.0-pre.21",
+    "@polymer/paper-radio-group": "^3.0.0-pre.21",
     "@polymer/paper-spinner": "^3.0.0-pre.21",
     "@polymer/paper-tabs": "^3.0.0-pre.21",
     "@polymer/polymer": "^3.0.0"

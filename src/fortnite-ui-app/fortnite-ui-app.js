@@ -9,35 +9,33 @@ class FortniteUiApp extends PolymerElement {
   static get template() {
     return html`
       <style>
-        :host {
-          display: block;
-        }
-
-        paper-dropdown-menu, paper-listbox, paper-input, paper-button {
-          width: 320px;
-          margin: auto;
-          display: block;
+        paper-radio-group, paper-listbox, paper-input, paper-button {
+          width: 100%;
           text-align: center;
           padding-bottom: 15px;
           padding-top: 15px;
         }
 
+        paper-item {
+          justify-content: center;
+        }
+        
         paper-tabs {
-          width: 400px;
+          color: var(--paper-blue-900);
           --paper-tabs-selection-bar-color: var(--paper-blue-900);
           --paper-tab-ink: var(--paper-blue-900);
         }
-  
+        
         paper-button.custom:hover {
           background-color: var(--paper-light-blue-50);
         }
-
+        
         paper-spinner {
           padding: 0;
           max-width: 0;
           max-height: 0;
         }
-
+        
         paper-spinner.active {
           max-width: initial;
           max-height: initial;
@@ -45,87 +43,97 @@ class FortniteUiApp extends PolymerElement {
           width: 15px;
           margin: 0px 0px 0px -15px
         }
-
+        
         .flex-container {
           display: flex;
           flex-wrap: wrap;
           justify-content: center;
         }
 
+        .col {
+          flex: 1;
+          text-align: center;
+        }
+        
+        @media (max-width: 400px) {
+          .flex-container {
+            display: block;
+          }
+        }
+        
         .display-none {
           display: none;
         }
       </style>
-      <paper-dropdown-menu label="Platform" id="platform" required auto-validate error-message="Platform is required" on-iron-select="_itemSelected">
-        <paper-listbox slot="dropdown-content">
-          <paper-item>pc</paper-item>
-          <paper-item>xbl</paper-item>
-          <paper-item>psn</paper-item>
-        </paper-listbox>
-      </paper-dropdown-menu>
-      <paper-input 
-        always-float-label
-        label="Epic Nick-name"
-        id="epicNickName"
-        required
-        auto-validate
-        error-message="Epic Nick-name is required"
-        on-keydown="_checkForEnter"></paper-input>
-      <paper-button toggles raised class="custom" on-tap="_invokeApi"><paper-spinner id="spinner" active=[[active]]></paper-spinner>Get Stats</paper-button>
-      <div id="tabsDiv" class="flex-container">
-        <div class="filter display-none">
-          <paper-tabs id="paperTabs" scrollable>
-            <paper-tab id="tabZero" on-tap="_displayLifetimeStats">Lifetime Statistics</paper-tab>
-            <paper-tab on-tap="_displayRecentMatches">Recent Matches</paper-tab>
-          </paper-tabs>
+      <div class="flex-container">
+        <div class="col">
         </div>
-      </div>
-      <div id="searchResults">
-        <div class="flex-container">
-          <div class="filter display-none">
-            <paper-item>Epic User Handle: [[epicUserHandle]]</paper-item>
-            <paper-item>Lifetime Wins: [[lifetimeWins]]</paper-item>
-            <paper-item>Lifetime Kills: [[lifetimeKills]]</paper-item>
-            <paper-item>Lifetime Kill/Death Ratio: [[lifetimeKd]]</paper-item>
-            <paper-item>Lifetime Score: [[lifetimeScore]]</paper-item>
-            <paper-item>Lifetime Matches Played: [[lifetimeMatchesPlayed]]</paper-item>
-            <paper-item>Lifetime Win Percentage: [[lifetimeWinPercent]]</paper-item>
-            <paper-item>Lifetime Top 3s: [[lifetimeTop3s]]</paper-item>
-            <paper-item>Lifetime Top 5s: [[lifetimeTop5s]]</paper-item>
-            <paper-item>Lifetime Top 6s: [[lifetimeTop6s]]</paper-item>
-            <paper-item>Lifetime Top 10s: [[lifetimeTop10s]]</paper-item>
-            <paper-item>Lifetime Top 12s: [[lifetimeTop12s]]</paper-item>
-            <paper-item>Lifetime Top 25s: [[lifetimeTop25s]]</paper-item>
+        <div class="col">
+          <paper-item>Platform</paper-item>
+          <paper-radio-group id="platform" label="Platform" selected="pc">
+            <paper-radio-button name="pc">pc</paper-radio-button>
+            <paper-radio-button name="xbl">xbl</paper-radio-button>
+            <paper-radio-button name="psn">psn</paper-radio-button>
+          </paper-radio-group>
+          <paper-input 
+            always-float-label
+            label="Epic Nick-name"
+            id="epicNickName"
+            required
+            auto-validate
+            error-message="Epic Nick-name is required"
+            on-keydown="_checkForEnter"></paper-input>
+          <paper-button toggles raised class="custom" on-tap="_invokeApi"><paper-spinner id="spinner" active=[[active]]></paper-spinner>Get Stats</paper-button>
+          <div id="tabsDiv">
+            <div class="filter display-none">
+              <paper-tabs id="paperTabs">
+                <paper-tab id="tabZero" on-tap="_displayLifetimeStats">Lifetime Statistics</paper-tab>
+                <paper-tab on-tap="_displayRecentMatches">Recent Matches</paper-tab>
+              </paper-tabs>
+            </div>
+          </div>
+          <div id="searchResults">
+            <div class="filter display-none">
+              <paper-item>Epic User Handle: [[epicUserHandle]]</paper-item>
+              <paper-item>Lifetime Wins: [[lifetimeWins]]</paper-item>
+              <paper-item>Lifetime Kills: [[lifetimeKills]]</paper-item>
+              <paper-item>Lifetime Kill/Death Ratio: [[lifetimeKd]]</paper-item>
+              <paper-item>Lifetime Score: [[lifetimeScore]]</paper-item>
+              <paper-item>Lifetime Matches Played: [[lifetimeMatchesPlayed]]</paper-item>
+              <paper-item>Lifetime Win Percentage: [[lifetimeWinPercent]]</paper-item>
+              <paper-item>Lifetime Top 3s: [[lifetimeTop3s]]</paper-item>
+              <paper-item>Lifetime Top 5s: [[lifetimeTop5s]]</paper-item>
+              <paper-item>Lifetime Top 6s: [[lifetimeTop6s]]</paper-item>
+              <paper-item>Lifetime Top 10s: [[lifetimeTop10s]]</paper-item>
+              <paper-item>Lifetime Top 12s: [[lifetimeTop12s]]</paper-item>
+              <paper-item>Lifetime Top 25s: [[lifetimeTop25s]]</paper-item>
+            </div>
+          </div>
+          <div id="recentMatches">
+            <div class="filter display-none">
+              <paper-item>Epic User Handle: [[epicUserHandle]]</paper-item>
+              <template is="dom-repeat" items="[[recentMatchesRepeat]]">
+                <paper-item>Match ID: [[item.id]]</paper-item>
+                <paper-item>Kills: [[item.kills]]</paper-item>
+                <paper-item>Minutes Played: [[item.minutesPlayed]]</paper-item>
+                <paper-item>Match ID: [[item.id]]</paper-item>
+                <paper-item>Result: [[item.result]]</paper-item>
+                <hr/>
+              </template>
+            </div>
+          </div>
+          <div id="playerNotFound">
+            <div class="filter display-none">
+              <paper-item>Player Not found!</paper-item>
+            </div>
+          </div>
+          <div id="generalError">
+            <div class="filter display-none">
+              <paper-item>Error processing request.</paper-item>
+            </div>
           </div>
         </div>
-      </div>
-      <div id="recentMatches">
-        <div class="flex-container">
-          <div class="filter display-none">
-            <paper-item>Epic User Handle: [[epicUserHandle]]</paper-item>
-            <template is="dom-repeat" items="[[recentMatchesRepeat]]">
-              <paper-item>Match ID: [[item.id]]</paper-item>
-              <paper-item>Kills: [[item.kills]]</paper-item>
-              <paper-item>Minutes Played: [[item.minutesPlayed]]</paper-item>
-              <paper-item>Match ID: [[item.id]]</paper-item>
-              <paper-item>Result: [[item.result]]</paper-item>
-              <hr/>
-            </template>
-          </div>
-        </div>
-      </div>
-      <div id="playerNotFound">
-        <div class="flex-container">
-          <div class="filter display-none">
-            <paper-item>Player Not found!</paper-item>
-          </div>
-        </div>
-      </div>
-      <div id="generalError">
-        <div class="flex-container">
-          <div class="filter display-none">
-            <paper-item>Error processing request.</paper-item>
-          </div>
+        <div class="col">
         </div>
       </div>
     `;
@@ -192,11 +200,10 @@ class FortniteUiApp extends PolymerElement {
     this._hideElement(this.$.searchResults);
     this._hideElement(this.$.recentMatches);
     this.$.spinner.classList.add('active');
-    const platValidate = this.$.platform.validate();
     const epicNNValidate = this.$.epicNickName.validate();
-    if(platValidate && epicNNValidate){
+    if(epicNNValidate){
       var url = 'https://3oemw4weak.execute-api.us-east-1.amazonaws.com/api/fortnite-api';
-      var data = {platform: this.$.platform.value, epicNickname: this.$.epicNickName.value};
+      var data = {platform: this.$.platform.selected, epicNickname: this.$.epicNickName.value};
 
       fetch(url, {
         method: 'POST',
@@ -310,10 +317,6 @@ class FortniteUiApp extends PolymerElement {
         divItem.classList.add('display-none');
       }
     });
-  }
-
-  _itemSelected() {
-    this.$.platform.validate();
   }
 
   _checkForEnter(key) {
