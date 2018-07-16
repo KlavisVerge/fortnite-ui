@@ -31,3 +31,9 @@ $ polymer test
 ```
 
 Your application is already set up to be tested via [web-component-tester](https://github.com/Polymer/web-component-tester). Run `polymer test` to run your application's test suite locally.
+
+
+## Deploy
+
+polymer build
+aws s3 sync ./build/default s3://apis-for-all/fortnite --acl public-read --exclude ".git/*"
