@@ -50,14 +50,52 @@ class FortniteUiApp extends PolymerElement {
           justify-content: center;
         }
 
-        .col {
+        .twitch-col {
           flex: 1;
-          text-align: center;
+          order 3;
+        }
+
+        .search-col {
+          flex: 1;
+          order: 1;
+        }
+
+        .ad-col {
+          flex: 1;
+          order: 2;
         }
         
         @media (max-width: 400px) {
           .flex-container {
-            display: block;
+            display: flex;
+            flex-direction: row;
+          }
+
+          .twitch-col {
+            display: flex;
+            flex-direction: row;
+            order: 3;
+            flex-grow: unset;
+            flex-shrink: unset;
+            flex-basis:unset;
+          }
+
+          .search-col {
+            display: flex;
+            flex-direction: column;
+            order: 1;
+            flex-grow: unset;
+            flex-shrink: unset;
+            flex-basis:unset;
+          }
+
+          .ad-col {
+            display: flex;
+            flex-direction: row;
+            order: 2;
+            flex-grow: unset;
+            flex-shrink: unset;
+            flex-basis:unset;
           }
         }
         
@@ -66,9 +104,10 @@ class FortniteUiApp extends PolymerElement {
         }
       </style>
       <div class="flex-container">
-        <div class="col">
+        <div class="twitch-col">
+
         </div>
-        <div class="col">
+        <div class="search-col">
           <paper-item>Platform</paper-item>
           <paper-radio-group id="platform" label="Platform" selected="pc">
             <paper-radio-button name="pc">pc</paper-radio-button>
@@ -133,7 +172,8 @@ class FortniteUiApp extends PolymerElement {
             </div>
           </div>
         </div>
-        <div class="col">
+        <div class="ad-col">
+
         </div>
       </div>
     `;
