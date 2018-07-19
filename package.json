@@ -2,6 +2,7 @@
   "name": "fortnite-ui",
   "description": "Fortnite statistics",
   "dependencies": {
+    "twitch-ui": "KlavisVerge/twitch-ui",
     "@polymer/paper-button": "^3.0.0-pre.21",
     "@polymer/paper-input": "^3.0.0-pre.21",
     "@polymer/paper-item": "^3.0.0-pre.21",

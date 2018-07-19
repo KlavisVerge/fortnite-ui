@@ -1,5 +1,6 @@
 import {html, PolymerElement} from '@polymer/polymer/polymer-element.js';
 import '@polymer/polymer/lib/elements/dom-repeat.js';
+import 'twitch-ui/twitch-ui.js';
 
 /**
  * @customElement
@@ -105,7 +106,7 @@ class FortniteUiApp extends PolymerElement {
       </style>
       <div class="flex-container">
         <div class="twitch-col">
-
+          <twitch-ui gamename="fortnite"></twitch-ui>
         </div>
         <div class="search-col">
           <paper-item>Platform</paper-item>
