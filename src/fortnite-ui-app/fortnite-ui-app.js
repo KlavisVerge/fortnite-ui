@@ -265,7 +265,6 @@ class FortniteUiApp extends PolymerElement {
         this._showElement(this.$.generalError);
       })
       .then(response => {
-        console.log('Success:', response);
         let res = JSON.parse(response);
         this._hideElement(this.$.generalError);
         this.$.spinner.active = false;
