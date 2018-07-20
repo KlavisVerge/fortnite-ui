@@ -36,4 +36,4 @@ Your application is already set up to be tested via [web-component-tester](https
 ## Deploy
 
 polymer build
-aws s3 sync ./build/default s3://apis-for-all/fortnite --acl public-read --exclude ".git/*"
+aws s3 sync ./build/es6-unbundled s3://apis-for-all/fortnite --acl public-read

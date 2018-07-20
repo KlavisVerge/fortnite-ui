@@ -1,6 +1,13 @@
 import {html, PolymerElement} from '@polymer/polymer/polymer-element.js';
 import '@polymer/polymer/lib/elements/dom-repeat.js';
 import 'twitch-ui/twitch-ui.js';
+import '@polymer/paper-radio-group/paper-radio-group.js';
+import '@polymer/paper-listbox/paper-listbox.js';
+import '@polymer/paper-item/paper-item.js';
+import '@polymer/paper-input/paper-input.js';
+import '@polymer/paper-button/paper-button.js';
+import '@polymer/paper-spinner/paper-spinner.js';
+import '@polymer/paper-tabs/paper-tabs.js';
 
 /**
  * @customElement
