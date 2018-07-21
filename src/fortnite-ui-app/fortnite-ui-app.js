@@ -73,7 +73,7 @@ class FortniteUiApp extends PolymerElement {
           order: 2;
         }
         
-        @media (max-width: 400px) {
+        @media (max-width: 480px) {
           .flex-container {
             display: flex;
             flex-direction: row;
