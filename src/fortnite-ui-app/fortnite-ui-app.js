@@ -72,6 +72,7 @@ class FortniteUiApp extends PolymerElement {
         .twitch-col {
           flex: 1;
           order 3;
+          padding: 0 15px 0 15px;
         }
 
         .search-col {
@@ -82,6 +83,7 @@ class FortniteUiApp extends PolymerElement {
         .reddit-col {
           flex: 1;
           order: 2;
+          padding: 0 15px 0 15px;
         }
 
         .display-none {
@@ -105,6 +107,7 @@ class FortniteUiApp extends PolymerElement {
             flex-grow: unset;
             flex-shrink: unset;
             flex-basis:unset;
+            padding: 0 5px 0 5px;
           }
 
           .search-col {
@@ -115,7 +118,8 @@ class FortniteUiApp extends PolymerElement {
             flex-shrink: unset;
             flex-basis:unset;
             width: 100%;
-            padding: 0 15px 0 15px;
+            align-items: center;
+            padding: 0 5px 0 5px;
           }
 
           .reddit-col {
@@ -125,6 +129,8 @@ class FortniteUiApp extends PolymerElement {
             flex-grow: unset;
             flex-shrink: unset;
             flex-basis:unset;
+            padding: 0;
+            padding: 0 5px 0 5px;
           }
         }
       </style>
