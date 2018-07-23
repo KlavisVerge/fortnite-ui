@@ -1,8 +1,9 @@
 import {html, PolymerElement} from '@polymer/polymer/polymer-element.js';
 import '@polymer/polymer/lib/elements/dom-repeat.js';
+import 'api-nav/api-nav.js';
+import 'reddit-ui/reddit-ui.js';
 import 'twitch-ui/twitch-ui.js';
 import '@polymer/paper-radio-group/paper-radio-group.js';
-import '@polymer/paper-listbox/paper-listbox.js';
 import '@polymer/paper-item/paper-item.js';
 import '@polymer/paper-input/paper-input.js';
 import '@polymer/paper-button/paper-button.js';
@@ -17,11 +18,12 @@ class FortniteUiApp extends PolymerElement {
   static get template() {
     return html`
       <style>
-        paper-radio-group, paper-listbox, paper-input, paper-button {
+        paper-radio-group, paper-input, paper-button {
           width: 100%;
           text-align: center;
-          padding-bottom: 15px;
-          padding-top: 15px;
+          padding: 15px 0px 15px 0px;
+          margin-left: 0;
+          margin-right: 0;
         }
 
         paper-item {
@@ -51,11 +53,20 @@ class FortniteUiApp extends PolymerElement {
           width: 15px;
           margin: 0px 0px 0px -15px
         }
+
+        paper-card {
+          width: 100%;
+        }
         
         .flex-container {
           display: flex;
           flex-wrap: wrap;
           justify-content: center;
+          background: #edeef0;
+        }
+
+        .bg-container {
+          background: #edeef0;
         }
 
         .twitch-col {
@@ -68,9 +79,17 @@ class FortniteUiApp extends PolymerElement {
           order: 1;
         }
 
-        .ad-col {
+        .reddit-col {
           flex: 1;
           order: 2;
+        }
+
+        .display-none {
+          display: none;
+        }
+
+        api-nav {
+          padding: 15px;
         }
         
         @media (max-width: 480px) {
@@ -82,7 +101,7 @@ class FortniteUiApp extends PolymerElement {
           .twitch-col {
             display: flex;
             flex-direction: row;
-            order: 3;
+            order: 2;
             flex-grow: unset;
             flex-shrink: unset;
             flex-basis:unset;
@@ -95,49 +114,52 @@ class FortniteUiApp extends PolymerElement {
             flex-grow: unset;
             flex-shrink: unset;
             flex-basis:unset;
+            width: 100%;
+            padding: 0 15px 0 15px;
           }
 
-          .ad-col {
+          .reddit-col {
             display: flex;
             flex-direction: row;
-            order: 2;
+            order: 3;
             flex-grow: unset;
             flex-shrink: unset;
             flex-basis:unset;
           }
         }
-        
-        .display-none {
-          display: none;
-        }
       </style>
+      <div class="bg-container">
+        <api-nav></api-nav>
+      </div>
       <div class="flex-container">
         <div class="twitch-col">
           <twitch-ui gamename="fortnite"></twitch-ui>
         </div>
         <div class="search-col">
-          <paper-item>Platform</paper-item>
-          <paper-radio-group id="platform" label="Platform" selected="pc">
-            <paper-radio-button name="pc">pc</paper-radio-button>
-            <paper-radio-button name="xbl">xbl</paper-radio-button>
-            <paper-radio-button name="psn">psn</paper-radio-button>
-          </paper-radio-group>
-          <paper-input 
-            always-float-label
-            label="Epic Nick-name"
-            id="epicNickName"
-            required
-            auto-validate
-            error-message="Epic Nick-name is required"
-            on-keydown="_checkForEnter"></paper-input>
-          <paper-button toggles raised class="custom" on-tap="_invokeApi"><paper-spinner id="spinner" active=[[active]]></paper-spinner>Get Stats</paper-button>
-          <div id="tabsDiv">
-            <div class="filter display-none">
-              <paper-tabs id="paperTabs">
-                <paper-tab id="tabZero" on-tap="_displayLifetimeStats">Lifetime Statistics</paper-tab>
-                <paper-tab on-tap="_displayRecentMatches">Recent Matches</paper-tab>
-              </paper-tabs>
-            </div>
+          <paper-card>
+            <paper-item>Platform</paper-item>
+            <paper-radio-group id="platform" label="Platform" selected="pc">
+              <paper-radio-button name="pc">pc</paper-radio-button>
+              <paper-radio-button name="xbl">xbl</paper-radio-button>
+              <paper-radio-button name="psn">psn</paper-radio-button>
+            </paper-radio-group>
+            <paper-input 
+              always-float-label
+              label="Epic Nick-name"
+              id="epicNickName"
+              required
+              auto-validate
+              error-message="Epic Nick-name is required"
+              on-keydown="_checkForEnter"></paper-input>
+            <paper-button toggles raised class="custom" on-tap="_invokeApi"><paper-spinner id="spinner" active=[[active]]></paper-spinner>Get Stats</paper-button>
+            <div id="tabsDiv">
+              <div class="filter display-none">
+                <paper-tabs id="paperTabs">
+                  <paper-tab id="tabZero" on-tap="_displayLifetimeStats">Lifetime Statistics</paper-tab>
+                  <paper-tab on-tap="_displayRecentMatches">Recent Matches</paper-tab>
+                </paper-tabs>
+              </div>
+            </paper-card>
           </div>
           <div id="searchResults">
             <div class="filter display-none">
@@ -163,7 +185,7 @@ class FortniteUiApp extends PolymerElement {
                 <paper-item>Match ID: [[item.id]]</paper-item>
                 <paper-item>Kills: [[item.kills]]</paper-item>
                 <paper-item>Minutes Played: [[item.minutesPlayed]]</paper-item>
-                <paper-item>Match ID: [[item.id]]</paper-item>
+                <paper-item>Date: [[item.dateCollected]]</paper-item>
                 <paper-item>Result: [[item.result]]</paper-item>
                 <hr/>
               </template>
@@ -180,8 +202,8 @@ class FortniteUiApp extends PolymerElement {
             </div>
           </div>
         </div>
-        <div class="ad-col">
-
+        <div class="reddit-col">
+          <reddit-ui game="Fortnite"></reddit-ui>
         </div>
       </div>
     `;
@@ -374,7 +396,7 @@ class FortniteUiApp extends PolymerElement {
 
   _displayLifetimeStats() {
     this._hideElement(this.$.recentMatches);
-    this._showElement(this.$.searchResults);;
+    this._showElement(this.$.searchResults);
   }
 
   _displayRecentMatches() {
