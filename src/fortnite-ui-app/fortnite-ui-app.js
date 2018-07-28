@@ -280,6 +280,7 @@ class FortniteUiApp extends PolymerElement {
     if(epicNNValidate){
       var url = 'https://3oemw4weak.execute-api.us-east-1.amazonaws.com/api/fortnite-api';
       var data = {platform: this.$.platform.selected, epicNickname: this.$.epicNickName.value};
+      let err = false;
 
       fetch(url, {
         method: 'POST',
@@ -298,8 +299,12 @@ class FortniteUiApp extends PolymerElement {
         this._hideElement(this.$.searchResults);
         this._hideElement(this.$.recentMatches);
         this._showElement(this.$.generalError);
+        err = true;
       })
       .then(response => {
+        if(err){
+          return;
+        }
         let res = JSON.parse(response);
         this._hideElement(this.$.generalError);
         this.$.spinner.active = false;
