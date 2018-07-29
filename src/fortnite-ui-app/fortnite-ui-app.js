@@ -209,7 +209,7 @@ class FortniteUiApp extends PolymerElement {
           </div>
         </div>
         <div class="reddit-col">
-          <reddit-ui game="Fortnite"></reddit-ui>
+          <reddit-ui game="Fortnite" displayname="Fortnite"></reddit-ui>
         </div>
       </div>
     `;
