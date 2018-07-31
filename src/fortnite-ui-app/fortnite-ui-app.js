@@ -278,13 +278,11 @@ class FortniteUiApp extends PolymerElement {
     this.$.spinner.classList.add('active');
     const epicNNValidate = this.$.epicNickName.validate();
     if(epicNNValidate){
-      var url = 'https://3oemw4weak.execute-api.us-east-1.amazonaws.com/api/fortnite-api';
-      var data = {platform: this.$.platform.selected, epicNickname: this.$.epicNickName.value};
+      var url = 'https://xupmhdl2g5.execute-api.us-east-1.amazonaws.com/api/fortnite-api?platform=' + this.$.platform.selected + '&epicNickname=' + this.$.epicNickName.value;
       let err = false;
 
       fetch(url, {
-        method: 'POST',
-        body: JSON.stringify(data),
+        method: 'GET',
         headers:{
           'Accept': 'application/json',
           'Content-Type': 'application/json'
